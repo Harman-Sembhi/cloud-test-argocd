@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harman-wordpress
+  labels:
+    app: harman-wordpress
+spec:
+  selector:
+    matchLabels:
+      app: harman-wordpress
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: harman-wordpress
+    spec:
+      containers:
+      - name: harman-wordpress
+        image: wordpress:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "mysql"
+        - name: WORDPRESS_DB_NAME
+          value: "wordpress"
+        - name: WORDPRESS_DB_USER
+          value: "wordpress"
+        - name: WORDPRESS_DB_PASSWORD
+          value: "secretpass123!"
